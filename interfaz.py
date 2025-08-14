@@ -141,10 +141,12 @@ def load_model_and_preprocessor():
     model_loaded = False
     
     try:
-        with open('model_RM.pkl', 'rb') as file:
-            model_ml = pickle.load(file)
+        from huggingface_hub import hf_hub_download
+        model_path = hf_hub_download(repo_id="nicolas2w1/model_RM", filename="model_RM.pkl")
+        with open(model_path, 'rb') as f:
+            model_ml = pickle.load(f)
         model_loaded = True
-    except:
+    except Exception:
         pass
     
     try:
