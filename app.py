@@ -22,10 +22,15 @@ municipios_antioquia = ['Medellín', 'Envigado', 'Rionegro', 'La Ceja', 'Sabanet
 
 def load_dataset():
     try:
-        df = pd.read_csv(DATASET_PATH)
+        print(f"[INFO] Intentando cargar dataset desde: {DATASET_PATH}")
+        df = pd.read_csv(DATASET_PATH, encoding='utf-8')
+        print(f"[INFO] Dataset cargado exitosamente: {len(df)} filas, {len(df.columns)} columnas")
+        print(f"[INFO] Columnas: {list(df.columns)}")
         return df, True
     except FileNotFoundError:
+        print(f"[ERROR] No se encontró el archivo: {DATASET_PATH}")
         # Datos simulados si no está el CSV (para que la app no se caiga)
+        print("[INFO] Generando datos simulados...")
         np.random.seed(42)
         years = list(range(1990, 2023))
         rubros = rubros_disponibles
@@ -39,6 +44,26 @@ def load_dataset():
                     volumen = area_prod * np.random.uniform(10, 25) + np.random.normal(0, 50)
                     data.append([year, rubro, municipio, area_prod, area_total, max(0, volumen)])
         df = pd.DataFrame(data, columns=['Año', 'Rubro', 'Municipio', 'Área Producción', 'Área total', 'Volumen Producción'])
+        print(f"[INFO] Datos simulados generados: {len(df)} filas")
+        return df, False
+    except Exception as e:
+        print(f"[ERROR] Error al cargar dataset: {e}")
+        # Datos simulados como respaldo
+        print("[INFO] Generando datos simulados como respaldo...")
+        np.random.seed(42)
+        years = list(range(1990, 2023))
+        rubros = rubros_disponibles
+        municipios = municipios_antioquia
+        data = []
+        for year in years:
+            for rubro in rubros:
+                for municipio in municipios:
+                    area_prod = np.random.uniform(5, 100)
+                    area_total = area_prod + np.random.uniform(0, 20)
+                    volumen = area_prod * np.random.uniform(10, 25) + np.random.normal(0, 50)
+                    data.append([year, rubro, municipio, area_prod, area_total, max(0, volumen)])
+        df = pd.DataFrame(data, columns=['Año', 'Rubro', 'Municipio', 'Área Producción', 'Área total', 'Volumen Producción'])
+        print(f"[INFO] Datos simulados generados: {len(df)} filas")
         return df, False
 
 def load_model_and_preprocessor():
