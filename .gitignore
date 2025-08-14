@@ -24,7 +24,9 @@ desktop.ini
 .ipynb_checkpoints/
 *.nbconvert.ipynb
 
-
+# Streamlit / caches
+.streamlit/
+.cache/
 
 # Logs
 *.log
