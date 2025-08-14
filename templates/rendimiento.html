@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="mb-3">📈 Evaluación del Modelo de Machine Learning</h3>
+
+{% if not datos.sim_status %}
+  <div class="alert alert-success">✅ Modelo cargado correctamente - Mostrando métricas reales</div>
+
+  <div class="row g-3">
+    <div class="col-6 col-md-3">
+      <div class="metric-card">
+        <small class="text-muted">🎯 R² Score</small>
+        <div class="h5 mb-0">{{ datos.r2 }}</div>
+        <div class="small text-success">{{ datos.delta_r2 }}</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="metric-card">
+        <small class="text-muted">📊 MAE</small>
+        <div class="h5 mb-0">{{ datos.mae }}</div>
+        <div class="small text-success">{{ datos.delta_mae }}</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="metric-card">
+        <small class="text-muted">🔍 RMSE</small>
+        <div class="h5 mb-0">{{ datos.rmse }}</div>
+        <div class="small text-success">{{ datos.delta_rmse }}</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="metric-card">
+        <small class="text-muted">⚡ Precisión</small>
+        <div class="h5 mb-0">{{ datos.acc }}</div>
+        <div class="small text-success">{{ datos.delta_acc }}</div>
+      </div>
+    </div>
+  </div>
+
+  <h5 class="mt-4 mb-2">🎲 Importancia de las Características</h5>
+  <div class="mb-3">
+    {{ charts.importance|safe if charts.importance }}
+  </div>
+
+  <h5 class="mt-4 mb-2">📈 Curva de Aprendizaje</h5>
+  <div class="mb-3">
+    {{ charts.learning|safe if charts.learning }}
+  </div>
+
+{% else %}
+  <div class="alert alert-warning">⚠️ Modelo no encontrado - Mostrando métricas simuladas</div>
+
+  <div class="row g-3">
+    <div class="col-12 col-md-4">
+      <div class="metric-card">
+        <small class="text-muted">🎯 Estado</small>
+        <div class="h5 mb-0">Simulación</div>
+        <div class="small text-danger">Modelo no cargado</div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="metric-card">
+        <small class="text-muted">📊 Precisión Estimada</small>
+        <div class="h5 mb-0">{{ datos.prec_est }}</div>
+        <div class="small text-muted">Aproximada</div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="metric-card">
+        <small class="text-muted">⚡ Modo</small>
+        <div class="h5 mb-0">Demo</div>
+        <div class="small text-muted">Funcional</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info mt-3">
+    💡 <strong>Para ver métricas reales del modelo:</strong>
+    <ol class="mb-0">
+      <li>Entrena tu modelo de Machine Learning</li>
+      <li>Guárdalo con <code>pickle</code></li>
+      <li>Súbelo a HuggingFace (o ajusta las rutas)</li>
+      <li>Reinicia la aplicación</li>
+    </ol>
+  </div>
+{% endif %}
+{% endblock %}

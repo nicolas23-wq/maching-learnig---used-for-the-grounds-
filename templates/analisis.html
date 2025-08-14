@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">📊 Análisis Exploratorio de Datos</h3>
+  <span class="badge bg-primary-subtle text-primary">Vista interactiva</span>
+  
+</div>
+
+<div class="row g-3">
+  <div class="col-6 col-md-3">
+    <div class="metric-card">
+      <div class="d-flex justify-content-between align-items-center">
+        <small class="text-muted">Total de Registros</small>
+        <span>📁</span>
+      </div>
+      <div class="display-6 fs-3 mb-0">{{ total_reg }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="metric-card">
+      <div class="d-flex justify-content-between align-items-center">
+        <small class="text-muted">Rubros Únicos</small>
+        <span>🌱</span>
+      </div>
+      <div class="display-6 fs-3 mb-0">{{ rubros_u }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="metric-card">
+      <div class="d-flex justify-content-between align-items-center">
+        <small class="text-muted">Municipios</small>
+        <span>🏘️</span>
+      </div>
+      <div class="display-6 fs-3 mb-0">{{ municipios_u }}</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="metric-card">
+      <div class="d-flex justify-content-between align-items-center">
+        <small class="text-muted">Período</small>
+        <span>📅</span>
+      </div>
+      <div class="display-6 fs-3 mb-0">{{ periodo }}</div>
+    </div>
+  </div>
+</div>
+
+<hr class="my-4"/>
+
+<div class="row g-3">
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header bg-white fw-semibold">🌾 Producción Promedio por Rubro</div>
+      <div class="card-body">
+        {{ charts.bar_avg_rubro|safe if charts.bar_avg_rubro }}
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card h-100">
+      <div class="card-header bg-white fw-semibold">🧩 Participación en Producción Total</div>
+      <div class="card-body">
+        {{ charts.pie_rubro|safe if charts.pie_rubro }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mt-1">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-white fw-semibold">📈 Evolución de la Producción Total por Año</div>
+      <div class="card-body">
+        {{ charts.line_yearly|safe if charts.line_yearly }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3 mt-1">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-white fw-semibold">🏆 Top 10 Municipios por Producción</div>
+      <div class="card-body">
+        {{ charts.bar_top_muni|safe if charts.bar_top_muni }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{# Secciones opcionales: se muestran solo si se proporcionan #}
+{% if charts.corr_heatmap %}
+<div class="row g-3 mt-1">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-white fw-semibold">🔗 Matriz de Correlación</div>
+      <div class="card-body">
+        {{ charts.corr_heatmap|safe }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if charts.heatmap_year_rubro %}
+<div class="row g-3 mt-1">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-white fw-semibold">🗺️ Mapa de Calor: Producción por Año y Rubro</div>
+      <div class="card-body">
+        {{ charts.heatmap_year_rubro|safe }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% if charts.scatter_multi %}
+<div class="row g-3 mt-1">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-white fw-semibold">🎯 Dispersión Multidimensional</div>
+      <div class="card-body">
+        {{ charts.scatter_multi|safe }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{# Vista de datos (opcional) #}
+{% if table_html %}
+<div class="row g-3 mt-1">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-white fw-semibold">🧾 Vista de Datos</div>
+      <div class="card-body">
+        <div class="table-responsive">
+          {{ table_html|safe }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

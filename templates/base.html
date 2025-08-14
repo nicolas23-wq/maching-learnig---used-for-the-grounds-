@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ title if title else "AgriPredict - Análisis y Predicción Agrícola" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- CSS propio -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <header class="main-header mb-4">
+    <div class="container">
+      <h1>🌾 AgriPredict - Análisis y Predicción Agrícola</h1>
+      <p class="lead mt-3 mb-0">Sistema inteligente para la predicción del volumen de producción agrícola en Antioquia</p>
+    </div>
+  </header>
+
+  <nav class="border-bottom">
+    <div class="container">
+      <ul class="nav nav-tabs tabs-custom">
+        <li class="nav-item">
+          <a class="nav-link {% if active=='prediccion' %}active{% endif %}" href="/">🎯 Predicción</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active=='analisis' %}active{% endif %}" href="/analisis">📊 Análisis de Datos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active=='visualizaciones' %}active{% endif %}" href="/visualizaciones">🔍 Visualizaciones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if active=='rendimiento' %}active{% endif %}" href="/rendimiento">📈 Rendimiento del Modelo</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9">
+          {% block content %}{% endblock %}
+        </div>
+        <div class="col-lg-3">
+          <div class="sidebar-info">
+            <h5 class="mb-3">🎯 Estado del Sistema</h5>
+            {% if data_status %}
+              <div class="alert alert-success py-2 mb-2">✅ Dataset cargado correctamente</div>
+            {% else %}
+              <div class="alert alert-warning py-2 mb-2">⚠️ Usando datos simulados</div>
+            {% endif %}
+            {% if model_status %}
+              <div class="alert alert-success py-2 mb-2">✅ Modelo ML cargado</div>
+            {% else %}
+              <div class="alert alert-warning py-2 mb-2">⚠️ Usando predicción simulada</div>
+            {% endif %}
+          </div>
+
+          <div class="info-box mt-3">
+            <h6>💡 Información del Sistema</h6>
+            <ul class="mb-0">
+              <li><strong>Algoritmo:</strong> Random Forest</li>
+              <li><strong>Variables:</strong> 5 características</li>
+              <li><strong>Datos:</strong> 1990-2022</li>
+              <li><strong>Precisión:</strong> ~90%</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="text-center text-muted py-4">
+    <div class="container">
+      <p>🌾 <strong>AgriPredict</strong> - Sistema Inteligente de Predicción Agrícola</p>
+      <p>Desarrollado para optimizar la producción agrícola en Antioquia</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (opcional para tabs) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

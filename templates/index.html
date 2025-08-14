@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <h3 class="mb-0">🎯 Sistema de Predicción Inteligente</h3>
+  <span class="badge bg-primary-subtle text-primary">Modelo ML / Demo</span>
+</div>
+
+<div class="row g-3">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-white fw-semibold">Parámetros del Cultivo</div>
+      <div class="card-body">
+        <form method="POST" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">📅 Año de Cultivo</label>
+            <input type="number" min="1990" max="2030" name="year" value="2023" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">🌱 Tipo de Cultivo</label>
+            <select name="rubro" class="form-select">
+              {% for r in rubros %}
+                <option value="{{ r }}">{{ r }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label class="form-label">🏘️ Municipio</label>
+            <select name="municipio" class="form-select">
+              {% for m in municipios %}
+                <option value="{{ m }}">{{ m }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">🏞️ Área de Producción (ha)</label>
+            <input type="number" step="0.1" name="area_produccion" value="10.0" class="form-control" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">🗺️ Área Total (ha)</label>
+            <input type="number" step="0.1" name="area_total" value="15.0" class="form-control" required>
+          </div>
+
+          <div class="col-12 d-flex justify-content-end">
+            <button type="submit" class="btn btn-success">🚀 Predecir Volumen</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if prediction %}
+  {% if prediction.error %}
+    <div class="alert alert-danger mt-4">{{ prediction.error }}</div>
+  {% elif prediction.valor is not none %}
+    <div class="row g-3 mt-1">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header bg-white fw-semibold">📈 Resultado de la Predicción</div>
+          <div class="card-body">
+            <div class="prediction-result">
+              <div class="d-flex justify-content-around flex-wrap mt-1">
+                <div class="text-center px-3">
+                  <h1 class="highlight">{{ prediction.valor|round(2) }}</h1>
+                  <p class="mb-0">Toneladas</p>
+                </div>
+                <div class="text-center px-3">
+                  <h3 class="highlight">{{ metrics.rendimiento|round(2) }}</h3>
+                  <p class="mb-0">Ton/Hectárea</p>
+                </div>
+                <div class="text-center px-3">
+                  <h3 class="highlight">{{ metrics.eficiencia|round(1) }}%</h3>
+                  <p class="mb-0">Eficiencia</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-1">
+      <div class="col-12 col-md-3">
+        <div class="metric-card">
+          <small class="text-muted">🌾 Volumen Predicho</small>
+          <div class="h5 mb-0">{{ prediction.valor|round(2) }} Ton</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="metric-card">
+          <small class="text-muted">📊 Rendimiento</small>
+          <div class="h5 mb-0">{{ metrics.rendimiento|round(2) }} Ton/Ha</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="metric-card">
+          <small class="text-muted">⚡ Eficiencia</small>
+          <div class="h5 mb-0">{{ metrics.eficiencia|round(1) }}%</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="metric-card">
+          <small class="text-muted">📅 Año Objetivo</small>
+          <div class="h5 mb-0">{{ metrics.anio }}</div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+{% endblock %}

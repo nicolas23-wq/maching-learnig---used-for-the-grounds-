@@ -1,0 +1,67 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Jupyter
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+
+
+# Logs
+*.log
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test / Coverage
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Model artifacts (potentialmente grandes)
+*.pkl
+*.joblib
+
+# Data files (potencialmente grandes)
+*.csv
+*.parquet
+*.feather
+*.xls
+*.xlsx
+
+# Datos específicos del proyecto
+Areas_cultivadas_y_produccion_agr_cola_en_Antioquia_desde_1990-2022_20250716.csv
+label_encoders.pkl
+model_RM.pkl
+
+# Outputs / reports (si se generan)
+outputs/
+reports/
+figures/
+media/
+
+# Windows shortcuts
+*.lnk

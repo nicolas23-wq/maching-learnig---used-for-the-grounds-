@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h3 class="mb-3">🔍 Visualizaciones Avanzadas</h3>
+
+<h5 class="mb-2">🔗 Matriz de Correlación</h5>
+<div class="mb-3">
+  {{ charts.corr|safe if charts.corr }}
+</div>
+
+{% if insights and insights|length > 0 %}
+  <div class="alert alert-info">
+    <strong>💡 Insights de Correlación:</strong>
+    <ul class="mb-0">
+      {% for it in insights %}
+        <li>{{ it }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+<h5 class="mt-4 mb-2">🗺️ Mapa de Calor: Producción por Año y Rubro</h5>
+<div class="mb-3">
+  {{ charts.heatmap|safe if charts.heatmap }}
+</div>
+
+<h5 class="mt-4 mb-2">📊 Distribución de Variables Clave</h5>
+<div class="row">
+  <div class="col-md-6 mb-3">
+    {{ charts.hist_area|safe if charts.hist_area }}
+  </div>
+  <div class="col-md-6 mb-3">
+    {{ charts.hist_vol|safe if charts.hist_vol }}
+  </div>
+</div>
+
+<h5 class="mt-4 mb-2">🎯 Análisis Multidimensional</h5>
+<div class="mb-3">
+  {{ charts.scatter|safe if charts.scatter }}
+</div>
+{% endblock %}
