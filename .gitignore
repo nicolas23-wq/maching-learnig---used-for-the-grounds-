@@ -1,0 +1,64 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.code-workspace
+
+# Jupyter
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# Streamlit / caches
+.streamlit/
+.cache/
+
+# Logs
+*.log
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# Test / Coverage
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Model artifacts (potentialmente grandes)
+*.pkl
+*.joblib
+
+# Data files (potencialmente grandes)
+*.csv
+*.parquet
+*.feather
+*.xls
+*.xlsx
+
+# Outputs / reports (si se generan)
+outputs/
+reports/
+figures/
+media/
+
+# Windows shortcuts
+*.lnk
