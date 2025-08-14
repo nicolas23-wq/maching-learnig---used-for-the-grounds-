@@ -100,7 +100,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- Configuración de datos ---
-DATASET_PATH = 'Areas_cultivadas_y_produccion_agr_cola_en_Antioquia_desde_1990-2022_20250716.csv'
+DATASET_PATH = 'Areas_cultivadas_y_produccion_agr_cola_en_Antioquia_desde_1990-2022_20250716 (1).csv'
 
 # Datos de fallback
 rubros_disponibles = ['Maíz', 'Café', 'Papa', 'Plátano', 'Aguacate', 'Frijol', 'Tomate']

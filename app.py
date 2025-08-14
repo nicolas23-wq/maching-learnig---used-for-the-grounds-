@@ -15,7 +15,7 @@ app = Flask(__name__)
 # --------------------------
 # CONFIGURACIÓN DE DATOS
 # --------------------------
-DATASET_PATH = 'Areas_cultivadas_y_produccion_agr_cola_en_Antioquia_desde_1990-2022_20250716.csv'
+DATASET_PATH = 'Areas_cultivadas_y_produccion_agr_cola_en_Antioquia_desde_1990-2022_20250716 (1).csv'
 
 rubros_disponibles = ['Maíz', 'Café', 'Papa', 'Plátano', 'Aguacate', 'Frijol', 'Tomate']
 municipios_antioquia = ['Medellín', 'Envigado', 'Rionegro', 'La Ceja', 'Sabaneta', 'Marinilla', 'Guarne']
